@@ -96,7 +96,7 @@
     const items = [
       'Maniobras e Izaje Industrial', 'Renta de Grúas 11 a 23.5 Ton', 'Montaje de Estructuras Metálicas',
       'Transporte de Carga Pesada', 'Publicidad y Anuncios Espectaculares', 'Maniobras Manuales hasta 300 Ton',
-      'Operadores Certificados', 'CDMX y Área Metropolitana', 'Atención Directa y Rápida',
+      'Operadores con Experiencia', 'CDMX y Área Metropolitana', 'Atención Directa y Rápida',
       'Equipo Propio Certificado', 'Maniobras en Altura', 'Servicio Profesional y Seguro'
     ];
     const full = [...items, ...items, ...items, ...items];
