@@ -202,7 +202,10 @@ button { font-family: inherit; }
 .nav-inner {
   display: flex; align-items: center;
   justify-content: space-between;
-  height: 74px;
+  height: 80px;
+}
+@media (min-width: 900px) {
+  .nav-inner { height: 100px; }
 }
 
 .nav-logo {
@@ -211,9 +214,12 @@ button { font-family: inherit; }
 }
 .nav-logo-img {
   display: block;
-  height: 52px;
+  height: 64px;
   width: auto;
   transition: filter 0.3s ease;
+}
+@media (min-width: 900px) {
+  .nav-logo-img { height: 80px; }
 }
 .nav-logo:hover .nav-logo-img {
   filter: drop-shadow(0 0 16px rgba(250,204,21,0.4));
@@ -261,7 +267,7 @@ button { font-family: inherit; }
 /* Mobile menu */
 #mob-menu {
   display: none;
-  position: absolute; top: 74px; left: 0; right: 0;
+  position: absolute; top: 80px; left: 0; right: 0;
   background: rgba(8,8,8,0.97);
   backdrop-filter: blur(28px);
   border-bottom: 1px solid var(--border);
@@ -653,8 +659,11 @@ button { font-family: inherit; }
   display: grid; grid-template-columns: 1fr;
   gap: 18px;
 }
-@media (min-width: 768px) {
-  .ambientes-grid { grid-template-columns: repeat(3, 1fr); }
+@media (min-width: 640px) {
+  .ambientes-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1200px) {
+  .ambientes-grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 .amb-card {
@@ -662,7 +671,7 @@ button { font-family: inherit; }
   overflow: hidden; cursor: default;
   aspect-ratio: 3/4;
 }
-@media (min-width: 768px) { .amb-card { aspect-ratio: 3/5; } }
+@media (min-width: 640px) and (max-width: 1199px) { .amb-card { aspect-ratio: 3/5; } }
 
 .amb-img {
   width: 100%; height: 100%; object-fit: cover;
@@ -816,61 +825,50 @@ button { font-family: inherit; }
 
 /* Equipment plate visual */
 .panel-scene {
-  perspective: 1000px;
-  padding: 44px;
+  padding: 20px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 22px;
   position: relative;
 }
-.panel-scene:hover .led-panel-body {
-  transform: rotateX(0deg) rotateY(0deg);
-}
-.led-panel-body {
-  aspect-ratio: 1/1;
-  background: linear-gradient(145deg, #201c0a 0%, #171717 55%, #0f0f0f 100%);
-  border-radius: 8px;
-  transform: rotateX(6deg) rotateY(-5deg);
-  transition: transform 0.7s var(--ease);
-  position: relative;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 14px;
-  box-shadow:
-    0 0 60px rgba(250,204,21,0.22),
-    0 0 120px rgba(250,204,21,0.1),
-    inset 0 0 30px rgba(250,204,21,0.08);
-}
-.led-panel-body::before {
-  content: '';
-  position: absolute; inset: 7px;
-  border: 1px solid rgba(250,204,21,0.18);
-  border-radius: 4px;
-  box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
-}
 
-.plate-icon {
-  width: 64px; height: 64px; border-radius: 50%;
-  background: rgba(250,204,21,0.1);
-  border: 1px solid rgba(250,204,21,0.35);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 26px; color: var(--gold);
-  position: relative; z-index: 1;
+/* Fleet photo grid — real photos, one per crane */
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
-.plate-spec {
-  font-size: clamp(2.4rem, 6vw, 3.4rem);
-  font-weight: 900; letter-spacing: -0.03em; color: var(--white);
-  line-height: 1; position: relative; z-index: 1;
+.fleet-card {
+  position: relative;
+  aspect-ratio: 1/1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
 }
-.plate-spec span {
-  display: inline-block; font-size: 0.32em; font-weight: 800;
-  color: var(--gold); letter-spacing: 0.1em; margin-left: 8px;
-  vertical-align: middle;
+.fleet-img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.85s var(--ease), filter 0.5s ease;
 }
-.plate-label {
-  font-size: 11px; font-weight: 700; letter-spacing: 0.16em;
-  text-transform: uppercase; color: var(--gray-dim);
-  position: relative; z-index: 1; text-align: center;
+.fleet-card:hover .fleet-img { transform: scale(1.08); filter: brightness(0.8); }
+
+.fleet-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.1) 55%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 14px 16px; z-index: 1;
 }
+.fleet-name { font-size: 13px; font-weight: 800; color: var(--white); line-height: 1.25; }
+.fleet-cap  { font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 0.06em; margin-top: 3px; }
+
+.fleet-card-icon {
+  background: linear-gradient(145deg, #201c0a 0%, #171717 55%, #0f0f0f 100%);
+  box-shadow: inset 0 0 30px rgba(250,204,21,0.08);
+}
+.fleet-icon {
+  position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 28px; color: var(--gold); opacity: 0.9; z-index: 1;
+}
+.fleet-overlay-static { background: none; }
 
 /* Floating badges on the panel */
 .p-badge {
@@ -1070,6 +1068,26 @@ button { font-family: inherit; }
   transition: opacity 0.2s ease;
 }
 .ci-wa-link:hover { opacity: 0.75; }
+
+/* Warehouse location map */
+.ci-map { margin-top: 34px; }
+.ci-map-frame {
+  aspect-ratio: 16/10;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  filter: invert(90%) hue-rotate(180deg) brightness(0.95) contrast(0.85);
+}
+.ci-map-frame iframe {
+  width: 100%; height: 100%; border: 0; display: block;
+}
+.ci-map-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  color: var(--gold); font-weight: 700; font-size: 13px;
+  text-decoration: none; margin-top: 14px;
+  transition: opacity 0.2s ease;
+}
+.ci-map-link:hover { opacity: 0.75; }
 
 /* Form panel */
 .contact-form-wrap { padding: 56px 48px; }
